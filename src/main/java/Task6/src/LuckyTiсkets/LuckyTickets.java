@@ -39,7 +39,6 @@ public class LuckyTickets {
         }
         ourResult.append("Quantity happy tickets with simple way: ").append(result.get("simple way"));
         ourResult.append("\nQuantity happy tickets with difficult way: ").append(result.get("difficult way"));
-        System.out.println(ourResult.toString());
         return ourResult.toString();
     }
 
