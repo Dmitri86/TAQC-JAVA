@@ -10,4 +10,8 @@ public class InputData {
         Display.showMessage(message);
         return sc.nextLine();
     }
+
+    public static void closeScanner(){
+        sc.close();
+    }
 }

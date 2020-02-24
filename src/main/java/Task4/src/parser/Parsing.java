@@ -17,6 +17,7 @@ public class Parsing {
         }else{
             Display.showMessage(secondMode());
         }
+        InputData.closeScanner();
     }
 
     private static String firstMode(){

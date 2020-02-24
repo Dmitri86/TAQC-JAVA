@@ -16,6 +16,6 @@ public class ValidateData {
     }
 
     private static  boolean isInputtedDataIncorrect(String[] inputData){
-        return !(new File(inputData[0]).exists()) || inputData[1].length() == 0;
+        return !(new File(inputData[0]).isFile()) || inputData[1].length() == 0;
     }
 }

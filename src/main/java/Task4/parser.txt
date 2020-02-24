@@ -1,7 +1,28 @@
-JAva java adsfklj
-java
-jfsadf
-asdf
-adsf jadsf java afkjdfaf
-javakdjsf asdfkadsf java
-jav
+Security in Java EE Applications
+The Java EE security specification supports a set of required security functionalities, including authentication,
+authorization, data integrity, and transport security. Before going deep into Java EE security, everyone should know
+the following terms:
+
+A Caller or User is an individual named identity defined in an identity store.
+
+A Credential contains or references information used to authenticate a caller. Examples of credentials are usernames/
+passwords, (API) tokens, or JWT tokens.
+
+A Group is an abstract concept defined by the Java EE specification and is a name or label that classifies users with
+a set of common characteristics that usually leads to a set of common permissions. Groups can be broadly defined and
+mirror real-life groups such as “admin” or “manager”, but can also be more fine-grained and more technically oriented,
+such as “view_user_pages”. A group can be defined by the application (typically when using an embedded authentication
+mechanism via e.g. JASPIC) or external to the application (typically when using a vendor-specific authentication
+mechanism and/or identity store).
+
+A Role is another abstract concept defined by the Java EE specification and like a group is also a name or label that
+classifies users with a set of common characteristics. The difference is in hierarchy; a group can be mapped to one or
+more roles, and a role, not a group, is used primarily to specify the permissions used to protect application
+resources. Java EE declarative security, such as constraints in web.xml, only works with roles, but using the JACC
+specification application resources can be protected directly via groups if so desired. For example, a URL in a web
+application may be protected by a “Reader” role, or a particular EJB method may be protected by an “Approver” role.
+Roles are defined by the application.
+
+The Operational environment is the environment in which the Java EE application is deployed and that, among others,
+contains data and systems that are external to the Java EE application. For Java EE security there are two main
+variations of this environment.
