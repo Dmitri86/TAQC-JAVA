@@ -27,19 +27,19 @@ public class ValidateDataTest {
 
     @Test
     public void isInputtedDataCorrectPositive() {
-        String[] data = {"D:\\Java\\TAQC\\src\\test\\java\\Task4\\src\\parser\\parserTest.txt", "JDK"};
+        String[] data = {"src/test/resources/Task4/parserTest.txt", "JDK"};
         Assert.assertTrue(ValidateData.isInputtedDataCorrect(data));
     }
 
     @Test
     public void isInputtedDataCorrectWithoutStringNegative() {
-        String[] data = {"D:\\Java\\TAQC\\src\\test\\java\\Task4\\src\\parser\\parserTest.txt", ""};
+        String[] data = {"src/test/resources/Task4/parserTest.txt", ""};
         Assert.assertFalse(ValidateData.isInputtedDataCorrect(data));
     }
 
     @Test
     public void isInputtedDataCorrectIncorrectPathNegative() {
-        String[] data = {"D:\\Java\\TAQC\\src\\test\\java\\Task4\\src\\parser", "JDK"};
+        String[] data = {"src/test/resources/", "JDK"};
         Assert.assertFalse(ValidateData.isInputtedDataCorrect(data));
     }
 }

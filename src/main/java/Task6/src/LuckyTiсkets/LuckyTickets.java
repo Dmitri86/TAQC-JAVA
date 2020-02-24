@@ -10,39 +10,15 @@ public class LuckyTickets {
     private int finishTicket;
     private List<Integer> listLuckySimpleWay;
     private List<Integer> listLuckyDifficultWay;
-    private String outcome;
 
     LuckyTickets(int startTicket, int finishTicket){
         this.startTicket = startTicket;
         this.finishTicket = finishTicket;
         this.listLuckySimpleWay = new ArrayList<>();
         this.listLuckyDifficultWay = new ArrayList<>();
-        outcome = Constants.EMPTY_STRING;
     }
 
-    @Override
-    public String toString() {
-        if(outcome.isEmpty()){
-            outcome = getStringResult(calculateLuckyTickets());
-        }
-        return outcome;
-    }
-
-    private String getStringResult (Map<String, Integer> result){
-        StringBuilder ourResult = new StringBuilder();
-        if(result.get("simple way") > result.get("difficult way")){
-            ourResult.append("======== Win \"Simple Way\" method! ========\n");
-        }else if(result.get("simple way") < result.get("difficult way")){
-            ourResult.append("======== Win \"Difficult way\" method! ========\n");
-        }else{
-           ourResult.append("======== It's a draw! ========\n");
-        }
-        ourResult.append("Quantity happy tickets with simple way: ").append(result.get("simple way"));
-        ourResult.append("\nQuantity happy tickets with difficult way: ").append(result.get("difficult way"));
-        return ourResult.toString();
-    }
-
-    private Map<String, Integer> calculateLuckyTickets(){
+    public Map<String, Integer> calculateLuckyTickets(){
         for(int i = startTicket; i <= finishTicket; i++){
             if(isTicketLuckySimpleWay(HandlingData.convertFromIntToArrayInt(i))){
                 listLuckySimpleWay.add(i);

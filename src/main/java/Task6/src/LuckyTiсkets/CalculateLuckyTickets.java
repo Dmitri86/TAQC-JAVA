@@ -18,12 +18,16 @@ public class CalculateLuckyTickets {
     public static void main(String[] args){
         Display.displayMessage(Constants.PROGRAM_INFO);
         String[] data;
-        do{
+        while(true){
             data = InputData.getTicketNumber();
-        }while(!ValidateData.isInputtedDataValid(data));
+            if(ValidateData.isInputtedDataValid(data)){
+                break;
+            }
+            Display.displayMessage(Constants.ERROR_INPUTTED_DATA);
+        }
         InputData.closeScanner();
         int[] modifiedData = HandlingData.modifiedData(data);
         LuckyTickets luckyTickets = new LuckyTickets(modifiedData[0], modifiedData[1]);
-        Display.displayLuckyTickets(luckyTickets);
+        Display.displayLuckyTickets(luckyTickets.calculateLuckyTickets());
     }
 }
