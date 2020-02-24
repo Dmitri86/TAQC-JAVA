@@ -24,4 +24,13 @@ public class LuckyTicketsTest {
         String result = luckyTickets.toString();
         Assert.assertEquals(expected, result);
     }
+
+    @Test
+    public void testToStringThirdPositive() {
+        LuckyTickets luckyTickets = new LuckyTickets(1111110, 1111150);
+        String expected = "======== Win \"Difficult way\" method! ========\nQuantity happy tickets with simple way: 2\nQuantity " +
+                "happy tickets with difficult way: 4";
+        String result = luckyTickets.toString();
+        Assert.assertEquals(expected, result);
+    }
 }
