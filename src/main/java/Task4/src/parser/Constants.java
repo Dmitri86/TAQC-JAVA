@@ -11,6 +11,7 @@ public interface Constants {
     String INPUTTED_DATA_ERROR = "Inputted parameters are wrong!";
     String UNKNOWN_ERROR = "Something went wrong..";
     String EMPTY_STRING = "";
+    String TEMPORARY_FILE_NAME = "temporary888.txt";
     String SUCCESSFUL_MESSAGE = "Succeeded!";
     String FAIL_MESSAGE = "Fail!";
 }

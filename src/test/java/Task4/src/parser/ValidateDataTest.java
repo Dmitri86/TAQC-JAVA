@@ -3,6 +3,9 @@ package Task4.src.parser;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class ValidateDataTest {
@@ -27,19 +30,25 @@ public class ValidateDataTest {
 
     @Test
     public void isInputtedDataCorrectPositive() {
-        String[] data = {"src/test/resources/Task4/parserTest.txt", "JDK"};
+        List<String> data = new ArrayList<>();
+        data.add("src/test/resources/Task4/parserTest.txt");
+        data.add("JDK");
         Assert.assertTrue(ValidateData.isInputtedDataCorrect(data));
     }
 
     @Test
     public void isInputtedDataCorrectWithoutStringNegative() {
-        String[] data = {"src/test/resources/Task4/parserTest.txt", ""};
+        List<String> data = new ArrayList<>();
+        data.add("src/test/resources/Task4/parserTest.txt");
+        data.add("");
         Assert.assertFalse(ValidateData.isInputtedDataCorrect(data));
     }
 
     @Test
     public void isInputtedDataCorrectIncorrectPathNegative() {
-        String[] data = {"src/test/resources/", "JDK"};
+        List<String> data = new ArrayList<>();
+        data.add("src/test/resources/");
+        data.add("JDK");
         Assert.assertFalse(ValidateData.isInputtedDataCorrect(data));
     }
 }

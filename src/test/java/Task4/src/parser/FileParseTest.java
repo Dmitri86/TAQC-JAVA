@@ -11,8 +11,8 @@ public class FileParseTest {
     public void getQuantityMatchesFirstPositive() {
         FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest.txt",
                 "JDK");
-        int expected = 7;
-        int result = fileParse.getQuantityMatches();
+        String expected = "7";
+        String result = fileParse.startProgram();
         Assert.assertEquals(expected, result);
     }
 
@@ -20,8 +20,8 @@ public class FileParseTest {
     public void getQuantityMatchesSecondPositive() {
         FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest.txt",
                 "1");
-        int expected = 5;
-        int result = fileParse.getQuantityMatches();
+        String expected = "5";
+        String result = fileParse.startProgram();
         Assert.assertEquals(expected, result);
     }
 
@@ -29,8 +29,17 @@ public class FileParseTest {
     public void getQuantityMatchesThirdPositive() {
         FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest.txt",
                 "a");
-        int expected = 213;
-        int result = fileParse.getQuantityMatches();
+        String expected = "213";
+        String result = fileParse.startProgram();
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test
+    public void getReplaceWordPositive() {
+        FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest2.txt",
+                "a", "a");
+        String expected = "Succeeded!";
+        String result = fileParse.startProgram();
         Assert.assertEquals(expected, result);
     }
 }

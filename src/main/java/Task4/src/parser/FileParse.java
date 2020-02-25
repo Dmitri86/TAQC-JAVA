@@ -9,29 +9,43 @@ public class FileParse {
     private String pattern;
     private String replaceString;
 
-    FileParse(String path, String searchString){
+    FileParse(String path, String pattern){
         this.path = path;
-        this.pattern = searchString;
+        this.pattern = pattern;
     }
 
-    FileParse(String path, String searchString, String replaceString){
-        this(path, searchString);
+    FileParse(String path, String pattern, String replaceString){
+        this(path, pattern);
         this.replaceString = replaceString;
     }
 
-    public Integer getQuantityMatches(){
-        try {
-            return countMatches();
-        }catch(IOException e) {
+    public String startProgram(){
+        try{
+            return runParsing();
+        }catch (IOException e){
             Display.showMessage(Constants.UNKNOWN_ERROR);
-            return 0;
+            return Constants.EMPTY_STRING;
         }
     }
 
-    private  int countMatches() throws IOException{
-        int count = 0;
-        FileReader fr = new FileReader(new File(path));
+    private String runParsing() throws IOException{
+        File inputFile = new File(path);
+        FileReader fr = new FileReader(inputFile);
         BufferedReader br = new BufferedReader(fr);
+        if(replaceString == null){
+            return getCount(br, fr).toString();
+        }
+        File temporaryFile = new File(getPathForTemporaryFile());
+        temporaryFile.createNewFile();
+        PrintWriter pw = new PrintWriter(temporaryFile);
+        if(replaceWords(fr, br, pw, inputFile, temporaryFile)){
+            return Constants.SUCCESSFUL_MESSAGE;
+        }
+        return Constants.FAIL_MESSAGE;
+    }
+
+    private Integer getCount(BufferedReader br, FileReader fr) throws IOException{
+        int count = 0;
         Pattern pt = Pattern.compile(pattern);
         while(br.ready()) {
             Matcher mt = pt.matcher(br.readLine());
@@ -43,38 +57,18 @@ public class FileParse {
         return count;
     }
 
-    public String replaceStrings(){
-        try{
-            return getReplace();
-        }catch (IOException e){
-            Display.showMessage(Constants.UNKNOWN_ERROR);
-            return Constants.FAIL_MESSAGE;
-        }
-    }
-
-    private String getReplace() throws IOException{
-        File inputFile = new File(path);
-        File temporaryFile = new File(getPathForTemporaryFile());
-        if(!temporaryFile.createNewFile()){
-            return Constants.FAIL_MESSAGE;
-        }
-        FileReader fr = new FileReader(inputFile);
-        BufferedReader br = new BufferedReader(fr);
-        PrintWriter pw = new PrintWriter(temporaryFile);
+    private boolean replaceWords(FileReader fr, BufferedReader br, PrintWriter pw,
+                                 File inputFile, File temporaryFile) throws IOException{
         while(br.ready()) {
             String readLine = br.readLine().replaceAll(pattern, replaceString);
             pw.println(readLine);
         }
         closeStreamForFileReader(fr, br);
         closeStreamForFileWriter(pw);
-        copyText(inputFile, temporaryFile);
-        if(temporaryFile.delete()){
-            return Constants.SUCCESSFUL_MESSAGE;
-        }
-        return Constants.FAIL_MESSAGE;
+        return copyText(inputFile, temporaryFile);
     }
 
-    private void copyText(File inputFile, File temporaryFile)
+    private boolean copyText(File inputFile, File temporaryFile)
             throws IOException {
 
         FileReader fr = new FileReader(temporaryFile);
@@ -85,6 +79,7 @@ public class FileParse {
         }
         closeStreamForFileReader(fr, br);
         closeStreamForFileWriter(pw);
+        return temporaryFile.delete();
     }
 
     private String getPathForTemporaryFile() {
@@ -92,7 +87,7 @@ public class FileParse {
         Pattern pt = Pattern.compile("\\w+\\.\\w+");
         Matcher mt = pt.matcher(temporaryPath);
         if(mt.find()){
-            temporaryPath = temporaryPath.substring(0, mt.start()) + "temporary888.txt";
+            temporaryPath = temporaryPath.substring(0, mt.start()) + Constants.TEMPORARY_FILE_NAME;
             return temporaryPath;
         }
         return Constants.EMPTY_STRING;
@@ -108,5 +103,4 @@ public class FileParse {
         pw.flush();
         pw.close();
     }
-
 }
