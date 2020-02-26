@@ -23,7 +23,6 @@ public class FileParse {
         try{
             return runParsing();
         }catch (IOException e){
-            Display.showMessage(Constants.UNKNOWN_ERROR);
             return Constants.EMPTY_STRING;
         }
     }

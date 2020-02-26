@@ -3,6 +3,8 @@ package Task4.src.parser;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+
 import static org.junit.Assert.*;
 
 public class FileParseTest {
@@ -39,6 +41,24 @@ public class FileParseTest {
         FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest2.txt",
                 "a", "a");
         String expected = "Succeeded!";
+        String result = fileParse.startProgram();
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test()
+    public void getReplaceWithIncorrectPath(){
+        FileParse fileParse = new FileParse("parserTest.txt",
+                "a", "a");
+        String expected = "";
+        String result = fileParse.startProgram();
+        Assert.assertEquals(expected, result);
+    }
+
+    @Test()
+    public void getQuantityMatchesWithoutMatchesString(){
+        FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest.txt",
+                "");
+        String expected = "3292";
         String result = fileParse.startProgram();
         Assert.assertEquals(expected, result);
     }

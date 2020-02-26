@@ -29,12 +29,17 @@ public class Parsing {
             }
             Display.showMessage(Constants.INPUTTED_DATA_ERROR);
         }
+        FileParse fileParse;
         if(mode.equals("1")){
-            FileParse fileParse = new FileParse(dataInput.get(0), dataInput.get(1));
-            Display.showMessage(fileParse.startProgram());
+            fileParse = new FileParse(dataInput.get(0), dataInput.get(1));
         }else {
-            FileParse fileParse = new FileParse(dataInput.get(0), dataInput.get(1), dataInput.get(2));
-            Display.showMessage(fileParse.startProgram());
+            fileParse = new FileParse(dataInput.get(0), dataInput.get(1), dataInput.get(2));
+        }
+        String result = fileParse.startProgram();
+        if(result.isEmpty()){
+            Display.showMessage(Constants.UNKNOWN_ERROR);
+        }else{
+            Display.showMessage(result);
         }
     }
 }
