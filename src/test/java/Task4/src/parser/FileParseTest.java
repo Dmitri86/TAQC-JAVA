@@ -45,7 +45,7 @@ public class FileParseTest {
         Assert.assertEquals(expected, result);
     }
 
-    @Test()
+    @Test
     public void getReplaceWithIncorrectPath(){
         FileParse fileParse = new FileParse("parserTest.txt",
                 "a", "a");
@@ -54,7 +54,7 @@ public class FileParseTest {
         Assert.assertEquals(expected, result);
     }
 
-    @Test()
+    @Test
     public void getQuantityMatchesWithoutMatchesString(){
         FileParse fileParse = new FileParse("src/test/resources/Task4/parserTest.txt",
                 "");

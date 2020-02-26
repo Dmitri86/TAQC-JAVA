@@ -56,6 +56,17 @@ public class FileParse {
         return count;
     }
 
+    private String getPathForTemporaryFile() {
+        String temporaryPath = (new File(path)).getPath();
+        Pattern pt = Pattern.compile("\\w+\\.\\w+");
+        Matcher mt = pt.matcher(temporaryPath);
+        if(mt.find()){
+            temporaryPath = temporaryPath.substring(0, mt.start()) + Constants.TEMPORARY_FILE_NAME;
+            return temporaryPath;
+        }
+        return Constants.EMPTY_STRING;
+    }
+
     private boolean replaceWords(FileReader fr, BufferedReader br, PrintWriter pw,
                                  File inputFile, File temporaryFile) throws IOException{
         while(br.ready()) {
@@ -79,17 +90,6 @@ public class FileParse {
         closeStreamForFileReader(fr, br);
         closeStreamForFileWriter(pw);
         return temporaryFile.delete();
-    }
-
-    private String getPathForTemporaryFile() {
-        String temporaryPath = (new File(path)).getPath();
-        Pattern pt = Pattern.compile("\\w+\\.\\w+");
-        Matcher mt = pt.matcher(temporaryPath);
-        if(mt.find()){
-            temporaryPath = temporaryPath.substring(0, mt.start()) + Constants.TEMPORARY_FILE_NAME;
-            return temporaryPath;
-        }
-        return Constants.EMPTY_STRING;
     }
 
     private void closeStreamForFileReader(FileReader fr, BufferedReader br)
