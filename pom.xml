@@ -27,7 +27,7 @@
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
                     <includes>
-                        <include>**/**Tests.class</include>
+                        <include>**/**Test.class</include>
                     </includes>
                     <excludes>
                         <exclude>InjectedTest.java</exclude>
